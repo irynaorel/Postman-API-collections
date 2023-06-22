@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "7d138f7a-f85f-4902-9c95-a244882e704a",
+		"name": "COVID API [Iryna Orel]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24965753"
+	},
+	"item": [
+		{
+			"name": "List of region names",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid-api.com/api/regions",
+					"protocol": "https",
+					"host": [
+						"covid-api",
+						"com"
+					],
+					"path": [
+						"api",
+						"regions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of provinces by iso code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid-api.com/api/provinces/UKR",
+					"protocol": "https",
+					"host": [
+						"covid-api",
+						"com"
+					],
+					"path": [
+						"api",
+						"provinces",
+						"UKR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of reports.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid-api.com/api/reports?date=2022-03-14&iso=UKR&region_name=Ukraine&region_province=Kiev",
+					"protocol": "https",
+					"host": [
+						"covid-api",
+						"com"
+					],
+					"path": [
+						"api",
+						"reports"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-03-14"
+						},
+						{
+							"key": "q",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "iso",
+							"value": "UKR"
+						},
+						{
+							"key": "region_name",
+							"value": "Ukraine"
+						},
+						{
+							"key": "region_province",
+							"value": "Kiev"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Total data by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid-api.com/api/reports/total?date=2022-09-27",
+					"protocol": "https",
+					"host": [
+						"covid-api",
+						"com"
+					],
+					"path": [
+						"api",
+						"reports",
+						"total"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2022-09-27"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

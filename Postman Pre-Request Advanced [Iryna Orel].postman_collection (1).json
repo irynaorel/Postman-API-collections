@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "31817b89-60e2-4b8d-9193-40e603b397fa",
+		"name": "Postman Pre-Request Advanced [Iryna Orel]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24965753"
+	},
+	"item": [
+		{
+			"name": "Registration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"eval(globals.basicTests)();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const username = pm.variables.replaceIn('{{$randomFirstName}}') + Math.floor(Math.random(1000) * 1000);\r",
+							"pm.environment.set('username', username.toLowerCase());\r",
+							"\r",
+							"const email = pm.variables.replaceIn('{{$randomEmail}}');\r",
+							"pm.environment.set('email', email);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{username}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}users",
+					"host": [
+						"{{url}}users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Pre Request Advanced",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"eval(globals.basicTests)();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"eval(environment.registration)();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"email\": \"{{email}}\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}users/login",
+					"host": [
+						"{{url}}users"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"eval(globals.basicTests)();\r",
+							"\r",
+							"pm.environment.set(\"slug\", pm.response.json().article.slug);\r",
+							"\r",
+							"eval(environment.deleteArticle)();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"eval(environment.registration)();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"article\": {\r\n        \"title\": \"{{$randomWords}}\",\r\n        \"description\": \"{{$randomWords}}\",\r\n        \"body\": \"{{$randomWords}}\",\r\n        \"tagList\": []\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}articles",
+					"host": [
+						"{{url}}articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}users/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"eval(globals.basicTests)();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"eval(environment.registration)();"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"email\": \"{{email}}\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}users/login",
+					"host": [
+						"{{url}}users"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"postman.setGlobalVariable('basicTests', ()=> {",
+					"pm.test(\"Successful Post requets\", function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 204, 422]);",
+					"});",
+					"",
+					"pm.test(\"Response time is less than 2000ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(2000);",
+					"});",
+					"});",
+					"//declare variable with script to registration",
+					"postman.setEnvironmentVariable('registration', ()=> {",
+					"    const url = pm.environment.get('url');",
+					"    const username = \"iron\" + pm.variables.replaceIn('{{$randomFirstName}}') + pm.variables.replaceIn('{{$randomWord}}');",
+					"    const email = pm.variables.replaceIn('{{$randomEmail}}');",
+					"    ",
+					"    const registrationRequest = {",
+					"  url: url + 'users',",
+					"  method: 'POST',",
+					"  header: {",
+					"    'Content-Type': 'application/json',",
+					"  },",
+					"  body: {",
+					"    mode: 'raw',",
+					"    raw: JSON.stringify({",
+					"    \"user\": {",
+					"        \"username\": username,",
+					"        \"email\": email,",
+					"        \"password\": \"12345\"",
+					"    }",
+					"    })",
+					"  }",
+					" };",
+					" pm.sendRequest(registrationRequest, (error, response) => {",
+					"  console.log(error ? error : response.json());",
+					"  pm.environment.set(\"email\", response.json().user.email);",
+					"  pm.environment.set(\"token\", response.json().user.token);",
+					" });",
+					"});",
+					"",
+					"//declare variable with script to delete article",
+					"postman.setEnvironmentVariable('deleteArticle', ()=> {",
+					"    const url = pm.environment.get('url');",
+					"    const slug = pm.environment.get('slug');",
+					"    const token = pm.environment.get('token');",
+					"    ",
+					"    const deleteArticle = {",
+					"  url: url + 'articles/' + slug,",
+					"  method: 'DELETE',",
+					"  header: {",
+					"     'Content-Type': 'application/json',",
+					"     'Authorization': 'Token ' + token,",
+					"  },",
+					"  body: {",
+					"    mode: 'none',",
+					"  }",
+					" };",
+					" pm.sendRequest(deleteArticle, (error, response) => {",
+					"  console.log(error ? error : response.json());",
+					" });",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
