@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "713de8b3-0e1e-4aa6-a564-31efdf37dda5",
+		"name": "TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23525004"
+	},
+	"item": [
+		{
+			"name": "POST Posts Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": {{userId}},\r\n    \"id\": 1625,\r\n    \"title\": \"{{postTitle}}\",\r\n    \"body\": \"{{postBady}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/posts",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

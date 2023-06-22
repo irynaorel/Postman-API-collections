@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "22d549f6-5854-4ce7-8292-696789873b00",
+		"name": "HTTP BIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23525004"
+	},
+	"item": [
+		{
+			"name": "Podstawowa Autoryzacja",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "passwd",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "httpbin.org/basic-auth/user/passwd",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"basic-auth",
+						"user",
+						"passwd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Autoryzacja Token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDM3MDksInVzZXJuYW1lIjoidGVzdGluZyIsImV4cCI6MTY2OTY0NjE2MiwiaWF0IjoxNjY0NDYyMTYyfQ.4zL17ixGk1QBZ5TUDU9Qn7D5Yi_5mBrk3n-2YG8IO2w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "httpbin.org//bearer",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"",
+						"bearer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

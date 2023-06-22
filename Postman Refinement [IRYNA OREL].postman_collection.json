@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "05b5425e-91f0-4e16-b447-3b03051e1edd",
+		"name": "Postman Refinement [IRYNA OREL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23525004"
+	},
+	"item": [
+		{
+			"name": "successful login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response contains 'username' property\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"username\");\r",
+							"});\r",
+							"pm.test(\"'bio' property after successful login has null value\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user.bio).to.eql(null);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": {\r\n    \"email\": \"iriotik@gmail.com\",\r\n    \"password\": \"12345\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://conduit.mate.academy/api/users/login",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login with non-existing email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Response contains 'email or password' property\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"email or password\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": {\r\n    \"email\": \"iriotik\",\r\n    \"password\": \"12345\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://conduit.mate.academy/api/users/login",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registration with existing email",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Response contains 'errors' property\", function () {\r",
+							"  pm.response.to.have.jsonBody('errors');\r",
+							"});\r",
+							"pm.test(\"Response contains error message about taken email\", function () {\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.expect(jsonData.errors.email[0]).to.eql('This email is taken.');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": {\r\n    \"username\": \"iriotik\",\r\n    \"email\": \"iriotik@gmail.com\",\r\n    \"password\": \"12345\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://conduit.mate.academy/api/users",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "registration with existing username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 422\", function () {\r",
+							"    pm.response.to.have.status(422);\r",
+							"});\r",
+							"pm.test(\"Response contains 'errors' property\", function () {\r",
+							"  pm.response.to.have.jsonBody('errors');\r",
+							"});\r",
+							"pm.test(\"Response contains error message about taken username\", function () {\r",
+							"  const jsonData = pm.response.json();\r",
+							"  pm.expect(jsonData.errors.username[0]).to.eql('This username is taken.');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"user\": {\r\n    \"username\": \"iritiok\",\r\n    \"email\": \"jon1@jon.jon\",\r\n    \"password\": \"12345\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://conduit.mate.academy/api/users",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

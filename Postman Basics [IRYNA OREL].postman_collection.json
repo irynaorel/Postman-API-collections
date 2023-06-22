@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "04d4df85-07f4-46fc-86f5-fb882421635e",
+		"name": "Postman Basics [IRYNA OREL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23525004"
+	},
+	"item": [
+		{
+			"name": "Registration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"username\": \"riotik1\",\r\n        \"email\": \"test1@gmail.com\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://conduit.mate.academy/api/users",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"email\": \"test1@gmail.com\",\r\n        \"password\": \"12345\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://conduit.mate.academy/api/users/login",
+					"protocol": "http",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMzNTEsInVzZXJuYW1lIjoicmlvdGlrMSIsImV4cCI6MTY2OTM5MzY1NiwiaWF0IjoxNjY0MjA5NjU2fQ.DQuOAZB6v1_MG5QGy5xsCfYgYkhthy0loGJhihRiMvU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"riotik1\",\r\n        \"bio\": \"Test edition\",\r\n        \"email\": \"test1@gmail.com\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMzNTEsInVzZXJuYW1lIjoicmlvdGlrMSIsImV4cCI6MTY2OTM5MzY1NiwiaWF0IjoxNjY0MjA5NjU2fQ.DQuOAZB6v1_MG5QGy5xsCfYgYkhthy0loGJhihRiMvU\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://conduit.mate.academy/api/user",
+					"protocol": "http",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Follow user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMzNTEsInVzZXJuYW1lIjoicmlvdGlrMSIsImV4cCI6MTY2OTM5NDE2MywiaWF0IjoxNjY0MjEwMTYzfQ.h0_h5WUiel71TnoL6B4mqfasjF7wO4yWYjA-Ykk4jpQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://conduit.mate.academy/api/profiles/generation697/follow",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"profiles",
+						"generation697",
+						"follow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unfollow user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDMzNTEsInVzZXJuYW1lIjoicmlvdGlrMSIsImV4cCI6MTY2OTM5NDE2MywiaWF0IjoxNjY0MjEwMTYzfQ.h0_h5WUiel71TnoL6B4mqfasjF7wO4yWYjA-Ykk4jpQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://conduit.mate.academy/api/profiles/generation697/follow",
+					"protocol": "https",
+					"host": [
+						"conduit",
+						"mate",
+						"academy"
+					],
+					"path": [
+						"api",
+						"profiles",
+						"generation697",
+						"follow"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
